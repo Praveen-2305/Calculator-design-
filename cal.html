@@ -7,25 +7,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Calculator</h1>
+    <h1>Crossover Calculator</h1>
     <form action="" name="CALCULATOR">
-    <input type="text" name="display" style="width: 370px; height:70px; background-color: #4c555c;"><br>
-    <input class="btn" type="button" value="1">
-    <input class="btn" type="button" value="2">
-    <input class="btn" type="button" value="3">
-    <input class="btn" type="button" value="+" style="background-color: #cc5c11 ;"><br>
-    <input class="btn" type="button" value="4">
-    <input class="btn" type="button" value="5">
-    <input class="btn" type="button" value="6">
-    <input class="btn" type="button" value="-" style="background-color: #ba55d3 ;"><br>
-    <input class="btn" type="button" value="7">
-    <input class="btn" type="button" value="8">
-    <input class="btn" type="button" value="9">
-    <input class="btn" type="button" value="*" style="background-color: #7db1b2;"><br>
-    <input class="btn" type="button" value="0">
-    <input class="btn" type="button" value="C" style="background-color: #cc0000;">
-    <input class="btn" type="button" value="=">
-    <input class="btn" type="button" value="&#247;" style="background-color: blue ;">
+    <input type="text" name="display" placeholder="0" id="output-screen" style="width: 370px; height:70px; background-color: #4c555c;"><br>
+    <input class="btn" type="button" value="0" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="1" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="2" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="+" style="background-color: #cc5c11 ;" onclick="updateScreen(this.value)"><br>
+    <input class="btn" type="button" value="3" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="4" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="5" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="-" style="background-color: #ba55d3 ;" onclick="updateScreen(this.value)"><br>
+    <input class="btn" type="button" value="6" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="7" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="8" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="*" style="background-color: #7db1b2;" onclick="updateScreen(this.value)"><br>
+    <input class="btn" type="button" value="9" onclick="updateScreen(this.value)">
+    <input class="btn" type="button" value="C" style="background-color: #864848;" onclick="displayOutput('')">
+    <input class="btn" type="button" value="=" onclick="performCalculation()">
+    <input class="btn" type="button" value="/" style="background-color: blue ;" onclick="updateScreen(this.value)">
 </form>
+<script>
+    const operators = ['+', '-', '*', '/'];
+const outputScreen = document.getElementById('output-screen');
+function displayOutput(value) {
+    outputScreen.value = value;
+}
+function updateScreen(clickedButton) {
+    let outputValue = outputScreen.value;
+    if (clickedButton === "C") {
+        displayOutput('');
+    } else if (operators.includes(clickedButton) && operators.includes(outputValue.slice(-1))) {
+        outputValue = outputValue.slice(0, -1);
+    } else {
+        outputValue += clickedButton;
+    }
+    displayOutput(outputValue);
+}
+function performCalculation() {
+    let outputValue = outputScreen.value;
+    let finalValue = eval(outputValue);
+    displayOutput(finalValue);
+}
+</script>
+
 </body>
 </html>
